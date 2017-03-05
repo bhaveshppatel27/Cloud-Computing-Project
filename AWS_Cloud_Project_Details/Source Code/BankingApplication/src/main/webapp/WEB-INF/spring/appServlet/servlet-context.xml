@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<beans:bean id="pdfViewResolver"
+		class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<beans:property name="order" value="1" />
+		<beans:property name="basename" value="views" />
+	</beans:bean>
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="order" value="4" />
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+
+	<!-- Velocity -->
+	<beans:bean id="velocityConfig"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<beans:property name="resourceLoaderPath" value="/" />
+	</beans:bean>
+
+	<beans:bean id="velocityViewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<beans:property name="cache" value="true" />
+		<beans:property name="prefix" value="/WEB-INF/velocity/" />
+		<beans:property name="suffix" value=".vm" />
+		<beans:property name="order" value="2" />
+	</beans:bean>
+
+<!-- freemarker config -->
+    <beans:bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+      <beans:property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+    </beans:bean>
+     
+    <!-- 
+      View resolvers can also be configured with ResourceBundles or XML files. If you need
+      different view resolving based on Locale, you have to use the resource bundle resolver.
+    -->
+    <beans:bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+      <beans:property name="cache" value="true"/>
+      <beans:property name="prefix" value=""/>
+      <beans:property name="suffix" value=".ftl"/>
+      <beans:property name="order" value="3" />
+    </beans:bean>
+
+	<!-- Configuring interceptors based on URI -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/*" />
+			<beans:bean class="com.neu.edu.wtp.utility.AuthenticationInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
+
+	<context:component-scan base-package="com.neu.edu.wtp.controller" />
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="1000000" />
+	</beans:bean>
+
+	<mvc:resources mapping="/images/**" location="file:${catalina.home}/images/" />
+
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:error_messages_en_US" />
+	</beans:bean>
+
+</beans:beans>

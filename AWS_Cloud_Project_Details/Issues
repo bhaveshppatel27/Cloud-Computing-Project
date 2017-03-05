@@ -1,0 +1,6 @@
+1) Unable to deploy codedeploy agent on ec2 ubuntu 16.04
+  - Realted Thread https://github.com/aws/aws-codedeploy-agent/issues/61
+  -******Point to note******: 
+  - Considering that maintenance for Ruby 2.0 ended in February 2016, 
+  CodeDeploy is now relying on an unmaintained version. It was advised well over a year ago to move 
+  all Ruby 2.0 projects to a newer version.

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!--  <property name="hibernate.connection.url">jdbc:mysql://cloud9-project.czwxx57ii3r3.us-east-1.rds.amazonaws.com:3306/cloud9_bankingapplication</property>-->
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://54.71.97.41:3306/bankingapplication</property>-->
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bankingapplication</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>-->
+
+		<property name="hibernate.connection.url">jdbc:mysql://mysqlinstance.cefgbrn9gwfw.us-west-2.rds.amazonaws.com:3306/bankingapplication</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">Cloud92016</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<!--  <property name="hibernate.show_sql">true</property>
+		<property name="format_sql">true</property>-->
+
+		<!-- EhCache Configuration -->
+		<!-- For singleton factory -->
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</property>
+		<!-- <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property> -->
+		
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.use_query_cache">true</property>
+		<property name="net.sf.ehcache.configurationResourceName">ehconfig.xml</property>
+
+		<mapping class="com.neu.edu.wtp.pojo.User" />
+		<mapping class="com.neu.edu.wtp.pojo.BankAccount" />
+		<mapping class="com.neu.edu.wtp.pojo.CreditCard" />
+		<mapping class="com.neu.edu.wtp.pojo.Customer" />
+		<mapping class="com.neu.edu.wtp.pojo.DebitCard" />
+		<mapping class="com.neu.edu.wtp.pojo.Person" />
+		<mapping class="com.neu.edu.wtp.pojo.Transaction" />
+		<mapping class="com.neu.edu.wtp.pojo.ChequeDepositRequest" />
+
+
+
+
+
+	</session-factory>
+</hibernate-configuration>
